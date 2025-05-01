@@ -1,0 +1,155 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 hero-content">
+                <h1 class="hero-title">Hi, I'm</h1>
+                <h2 class="hero-subtitle">A Full Stack Developer</h2>
+                <p class="hero-description">Linux Admin | Python & Django Expert | Bash Scripting</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary me-3">View Projects</a>
+                    <a href="#contact" class="btn btn-outline-light">Contact Me</a>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <img src="/static/images/avatar.svg" alt="Profile Avatar" class="img-fluid hero-avatar">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <h3 class="mb-4">Professional Profile</h3>
+                    <p class="lead">I am a skilled Linux Administrator and Full Stack Developer with expertise in Python, Django, and web development. My passion lies in creating efficient and scalable solutions while maintaining robust systems.</p>
+                    <p>With a strong foundation in Linux administration and bash scripting, I bring a unique perspective to web development projects, ensuring both functionality and security.</p>
+                    <div class="mt-4">
+                        <h4 class="mb-3">Quick Facts</h4>
+                        <ul class="list-unstyled quick-facts">
+                            <li><i class="fas fa-server me-2"></i> Linux System Administration</li>
+                            <li><i class="fas fa-code me-2"></i> Full Stack Development</li>
+                            <li><i class="fab fa-python me-2"></i> Python & Django Expert</li>
+                            <li><i class="fas fa-terminal me-2"></i> Shell Scripting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="about-illustration">
+                    <img src="/static/images/about-illustration.svg" alt="About Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Skills & Expertise</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <div class="skills-illustration">
+                    <img src="/static/images/skills-illustration.svg" alt="Skills Illustration" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="skills-container">
+                    {% for skill in skills %}
+                    <div class="skill-item">
+                        <div class="d-flex justify-content-between">
+                            <span class="skill-name"><i class="{{ skill.icon }} me-2"></i> {{ skill.name }}</span>
+                            <span class="skill-percentage">{{ skill.proficiency }}%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar {{ skill.name|lower }}" role="progressbar" style="width: {{ skill.proficiency }}%" aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-6 mb-4">
+                <div class="project-card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ project.title }}</h3>
+                        <p class="card-text">{{ project.description }}</p>
+                        <div class="technology-stack">
+                            <span class="badge bg-secondary me-2">{{ project.technology }}</span>
+                        </div>
+                        <div class="project-links">
+                            {% if project.url %}
+                            <a href="{{ project.url }}" class="github-link" target="_blank">
+                                <i class="fab fa-github me-2"></i>GitHub
+                            </a>
+                            <a href="{{ project.url }}" class="live-link" target="_blank">
+                                <i class="fas fa-external-link-alt me-2"></i>Live Demo
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Let's Talk</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" style="background-color: var(--card-bg); border: none; border-radius: 15px;">
+                    <div class="card-body p-4">
+                        <form method="post" action="{% url 'contact' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your email address" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Message subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your message here..." required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
