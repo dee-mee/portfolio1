@@ -63,6 +63,27 @@ portfolio1/
 └── .gitignore        # Git ignore file
 ```
 
+## Deployment
+
+### Deploying to Render
+
+1. Create a Render account at https://render.com/
+2. Connect your GitHub account
+3. Click "New +" and select "Web Service"
+4. Choose your GitHub repository
+5. Select the `master` branch
+6. Under "Build Command", enter: 
+   ```bash
+   python3 -m pip install -r requirements.txt
+   python3 manage.py collectstatic --noinput
+   ```
+7. Under "Start Command", enter: `gunicorn portfolio.wsgi:application`
+8. Click "Create Web Service"
+
+Your website will be deployed and accessible through a Render-provided URL.
+
+Note: Ensure your repository includes all static files (CSS, JavaScript, images) in the `static` directory.
+
 ## Contributing
 
 Feel free to submit issues and enhancement requests!
