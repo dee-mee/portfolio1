@@ -5,18 +5,20 @@ from django.core.mail import send_mail
 import os
 
 def home(request):
-    # Get existing projects
-    projects = list(Project.objects.all().order_by('-created_at'))
-    skills = Skill.objects.all()
-    
-    # Skip GitHub integration in production for now
-    # We'll use the existing projects in the database
-    
-    context = {
-        'projects': projects,
-        'skills': skills,
-    }
-    return render(request, 'core/home.html', context)
+    try:
+        # Get existing projects
+        projects = list(Project.objects.all().order_by('-created_at'))
+        skills = Skill.objects.all()
+        
+        context = {
+            'projects': projects,
+            'skills': skills,
+        }
+        return render(request, 'core/home.html', context)
+    except Exception as e:
+        # Fallback to a simple response in case of errors
+        from django.http import HttpResponse
+        return HttpResponse(f"<h1>Portfolio Website</h1><p>We're experiencing technical difficulties. Please check back later.</p>")
 
 def contact(request):
     if request.method == 'POST':
