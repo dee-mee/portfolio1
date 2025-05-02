@@ -7,16 +7,19 @@ A modern and responsive portfolio website built with Django, showcasing my skill
 - Modern, responsive design with a dark theme
 - About section with professional profile
 - Skills showcase with interactive elements
-- Projects gallery
+- Projects gallery with SVG illustrations
 - Contact form for direct communication
-- SVG illustrations for visual appeal
+- GitHub project integration with stars and forks
+- Featured projects section with pinned projects
+- SVG images for project cards
 
 ## Technologies Used
 
-- Backend: Django
+- Backend: Django 5.0.1
 - Frontend: HTML5, CSS3, JavaScript
 - Database: SQLite (development)
-- Additional tools: Font Awesome, SVG illustrations
+- Additional tools: Font Awesome, SVG illustrations, Crispy Forms
+- SVG generation for project images
 
 ## Setup Instructions
 
@@ -54,10 +57,14 @@ A modern and responsive portfolio website built with Django, showcasing my skill
 ```
 portfolio1/
 ├── core/              # Main Django app
-├── portfolio/         # Portfolio app
-├── static/           # Static files (CSS, JavaScript, images)
+│   ├── management/    # Management commands
+│   │   └── commands/ # Custom commands (generate_project_images)
+│   ├── models/       # Database models
+│   ├── templates/    # HTML templates
+│   └── static/       # App-specific static files
 ├── media/            # User uploaded media
-├── templates/        # HTML templates
+│   └── projects/     # Project SVG images
+├── static/           # Global static files
 ├── manage.py         # Django management script
 ├── requirements.txt  # Project dependencies
 └── .gitignore        # Git ignore file

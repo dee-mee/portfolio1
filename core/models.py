@@ -4,15 +4,15 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     technology = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='projects/', blank=True, null=True)
+    image = models.FileField(upload_to='projects/', blank=True, null=True, help_text='Project image or SVG file')
     url = models.URLField(blank=True, help_text='Live project URL if available')
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    # GitHub specific fields
     github_url = models.URLField(blank=True, help_text='GitHub repository URL')
     stars = models.IntegerField(default=0, blank=True, help_text='Number of GitHub stars')
     forks = models.IntegerField(default=0, blank=True, help_text='Number of GitHub forks')
     is_featured = models.BooleanField(default=False, help_text='Feature this project on the homepage')
+    pinned = models.BooleanField(default=False, help_text='Pin this project to the featured section')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
