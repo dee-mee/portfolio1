@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p!ok2o3+&4in$98hy)e%*3ej*&c^4952z7ia+9w#y)pxmka35('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'portfolio-04lr.onrender.com',
+    'portfolio-2ogh.onrender.com',
     'localhost',
     '127.0.0.1'
 ]
@@ -130,6 +130,11 @@ STATICFILES_DIRS = [
 
 # Whitenoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Security settings for production
+SECURE_SSL_REDIRECT = False  # Set to True in production with SSL
+SESSION_COOKIE_SECURE = False  # Set to True in production with SSL
+CSRF_COOKIE_SECURE = False  # Set to True in production with SSL
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
