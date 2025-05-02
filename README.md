@@ -39,12 +39,12 @@ A modern and responsive portfolio website built with Django, showcasing my skill
 
 4. Apply database migrations:
    ```bash
-   python manage.py migrate
+   python3 manage.py migrate
    ```
 
 5. Run the development server:
    ```bash
-   python manage.py runserver
+   python3 manage.py runserver
    ```
 
 6. Open your browser and visit: http://127.0.0.1:8000/
