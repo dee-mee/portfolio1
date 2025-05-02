@@ -74,8 +74,7 @@ portfolio1/
 5. Select the `master` branch
 6. Under "Build Command", enter: 
    ```bash
-   python3 -m pip install -r requirements.txt
-   python3 manage.py collectstatic --noinput
+   python3 -m pip install -r requirements.txt && python3 manage.py collectstatic --noinput
    ```
 7. Under "Start Command", enter: `gunicorn portfolio.wsgi:application`
 8. Click "Create Web Service"
