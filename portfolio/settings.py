@@ -32,6 +32,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'portfolio-2ogh.onrender.com',
+    'portfolio-ghhm.onrender.com',
     'localhost',
     '127.0.0.1'
 ]
