@@ -5,10 +5,13 @@ from django.core.mail import send_mail
 import os
 
 def home(request):
-    projects = Project.objects.all().order_by('-created_at')
+    # Get featured projects first, then other projects
+    featured_projects = Project.objects.filter(is_featured=True).order_by('-created_at')
+    other_projects = Project.objects.filter(is_featured=False).order_by('-created_at')
     skills = Skill.objects.all()
     context = {
-        'projects': projects,
+        'featured_projects': featured_projects,
+        'other_projects': other_projects,
         'skills': skills,
     }
     return render(request, 'core/home.html', context)
