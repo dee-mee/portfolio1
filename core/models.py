@@ -17,6 +17,20 @@ class Project(models.Model):
     def __str__(self):
         return self.title
         
+    def get_image_url(self):
+        """
+        Returns the URL for the project image.
+        Ensures the URL is absolute and uses the correct media URL.
+        """
+        if self.image and hasattr(self.image, 'url'):
+            # Get the relative path from the file field
+            rel_path = str(self.image)
+            # Remove any leading 'media/' or '/' if present
+            rel_path = rel_path.replace('media/', '').lstrip('/')
+            # Return the URL with a single /media/ prefix
+            return f'/media/{rel_path}'
+        return ''
+        
     class Meta:
         ordering = ['-is_featured', '-created_at']
 
